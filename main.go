@@ -63,7 +63,6 @@ func main() {
 
 	elapsed := time.Since(start)
 
-	var total200, totalOther int
 	statusCount := make(map[int]int)
 	for res := range results {
 		if res.err != nil {
@@ -71,21 +70,13 @@ func main() {
 			continue
 		}
 		statusCount[res.status]++
-		if res.status == 200 {
-			total200++
-		} else {
-			totalOther++
-		}
 	}
 
 	fmt.Println("Relatório de Teste de Carga")
 	fmt.Printf("Tempo total gasto: %s\n", elapsed)
 	fmt.Printf("Total de requests realizados: %d\n", *totalRequests)
-	fmt.Printf("Requests com status 200: %d\n", total200)
-	fmt.Println("Distribuição de outros códigos de status HTTP:")
+	fmt.Println("Distribuição de códigos de status HTTP:")
 	for status, count := range statusCount {
-		if status != 200 {
-			fmt.Printf("Status %d: %d\n", status, count)
-		}
+		fmt.Printf("Status %d: %d\n", status, count)
 	}
 }
