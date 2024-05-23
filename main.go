@@ -26,7 +26,7 @@ func worker(url string, requests int, results chan<- result, wg *sync.WaitGroup)
 		results <- result{status: resp.StatusCode, err: nil}
 		resp.Body.Close()
 		elapsed := time.Since(start)
-		log.Printf("Request %d took %s", i, elapsed)
+		log.Printf("Request %d took %s with status %d", i, elapsed, resp.StatusCode)
 	}
 }
 
