@@ -77,8 +77,11 @@ func main() {
 	fmt.Println("Relatório de Teste de Carga")
 	fmt.Printf("Tempo total gasto: %s\n", elapsed)
 	fmt.Printf("Total de requests realizados: %d\n", totalCount)
-	fmt.Println("Distribuição de códigos de status HTTP:")
-	for status, count := range statusCount {
-		fmt.Printf("Status %d: %d\n", status, count)
+	fmt.Printf("Requests com status 200: %d\n", statusCount[200])
+	fmt.Println("Distribuição de outros códigos de status HTTP:")
+	for _, status := range []int{200, 404, 500, 429} {
+		if status != 200 {
+			fmt.Printf("Status %d: %d\n", status, statusCount[status])
+		}
 	}
 }
